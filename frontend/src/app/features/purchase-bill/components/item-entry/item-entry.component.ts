@@ -1,6 +1,11 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../../core/services/auth.service';
 import { LocationDto } from '../../../../core/models/login.model';
@@ -17,8 +22,17 @@ export class ItemEntryComponent implements OnInit {
   @Output() itemAdded = new EventEmitter<PurchaseBillItem>();
 
   itemForm: FormGroup;
-  
-  allowedItems = ['Mango', 'Apple', 'Banana', 'Orange', 'Grapes', 'Kiwi', 'Strawberry'];
+
+  allowedItems = [
+    'Mango',
+    'Apple',
+    'Banana',
+    'Orange',
+    'Grapes',
+    'Kiwi',
+    'Strawberry'
+  ];
+
   filteredItems: string[] = [];
   showAutocomplete = false;
 
@@ -51,44 +65,67 @@ export class ItemEntryComponent implements OnInit {
     });
 
     // Real-time calculations
-    this.itemForm.valueChanges.subscribe(val => {
+    this.itemForm.valueChanges.subscribe(() => {
       this.calculateDerivedValues();
     });
   }
 
   calculateDerivedValues(): void {
-    const standardCost = Number(this.itemForm.get('standardCost')?.value) || 0;
-    const standardPrice = Number(this.itemForm.get('standardPrice')?.value) || 0;
-    const qty = Number(this.itemForm.get('qty')?.value) || 0;
-    const discount = Number(this.itemForm.get('discount')?.value) || 0;
+    const standardCost =
+      Number(this.itemForm.get('standardCost')?.value) || 0;
+
+    const standardPrice =
+      Number(this.itemForm.get('standardPrice')?.value) || 0;
+
+    const qty =
+      Number(this.itemForm.get('qty')?.value) || 0;
+
+    const discount =
+      Number(this.itemForm.get('discount')?.value) || 0;
 
     const margin = standardPrice - standardCost;
-    const totalSelling = standardPrice * qty;
-    // Discount percentage applied to cost
-    const totalCost = standardCost * qty * (1 - (discount / 100));
 
-    this.itemForm.patchValue({
-      margin: margin,
-      totalCost: totalCost,
-      totalSelling: totalSelling
-    }, { emitEvent: false }); // Prevent infinite loops
+    const totalSelling = standardPrice * qty;
+
+    // Discount percentage applied to cost
+    const totalCost =
+      standardCost * qty * (1 - discount / 100);
+
+    this.itemForm.patchValue(
+      {
+        margin: margin,
+        totalCost: totalCost,
+        totalSelling: totalSelling
+      },
+      { emitEvent: false }
+    );
   }
 
   fetchLocations(): void {
     const companyCode = this.authService.getCompanyCode();
+
     if (!companyCode) {
-      console.warn('No company code found. Cannot fetch locations.');
+      console.warn(
+        'No company code found. Cannot fetch locations.'
+      );
       return;
     }
 
-    this.http.get<LocationDto[]>(`http://localhost:5260/api/locations?companyCode=${companyCode}`).subscribe({
-      next: (data) => {
-        this.locations = data;
-      },
-      error: (err) => {
-        console.error('Failed to fetch locations', err);
-      }
-    });
+    this.http
+      .get<LocationDto[]>(
+        `https://enhanzer-fullstack-assessment.onrender.com/api/locations?companyCode=${companyCode}`
+      )
+      .subscribe({
+        next: (data) => {
+          this.locations = data;
+        },
+        error: (err) => {
+          console.error(
+            'Failed to fetch locations',
+            err
+          );
+        }
+      });
   }
 
   filterItems(value: string): void {
@@ -96,14 +133,18 @@ export class ItemEntryComponent implements OnInit {
       this.filteredItems = this.allowedItems;
     } else {
       const filterValue = value.toLowerCase();
-      this.filteredItems = this.allowedItems.filter(option => 
+
+      this.filteredItems = this.allowedItems.filter(option =>
         option.toLowerCase().includes(filterValue)
       );
     }
   }
 
   selectItem(item: string): void {
-    this.itemForm.patchValue({ item });
+    this.itemForm.patchValue({
+      item
+    });
+
     this.showAutocomplete = false;
   }
 
@@ -116,6 +157,7 @@ export class ItemEntryComponent implements OnInit {
   onAdd(): void {
     if (this.itemForm.valid) {
       const rawValue = this.itemForm.getRawValue();
+
       const newItem: PurchaseBillItem = {
         item: rawValue.item,
         batch: rawValue.batch || '',
@@ -131,11 +173,12 @@ export class ItemEntryComponent implements OnInit {
 
       this.itemAdded.emit(newItem);
 
-      // Reset form to defaults, preserving batch if desired (we'll reset all for cleanliness)
+      // Reset form to defaults while retaining the current batch
       const currentBatch = rawValue.batch;
+
       this.itemForm.reset({
         item: '',
-        batch: currentBatch, // Retain batch selection
+        batch: currentBatch,
         standardCost: 0,
         standardPrice: 0,
         margin: 0,
@@ -150,4 +193,3 @@ export class ItemEntryComponent implements OnInit {
     }
   }
 }
-

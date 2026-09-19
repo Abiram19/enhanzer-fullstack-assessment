@@ -1,18 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { LoginRequest, LoginResponse, LocationDto } from '../models/login.model';
+import {
+  LoginRequest,
+  LoginResponse,
+  LocationDto
+} from '../models/login.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly apiUrl = 'http://localhost:5260/api/auth/login';
-  private readonly localApiUrl = 'http://localhost:5260/api/locations';
+  private readonly apiUrl =
+    'https://enhanzer-fullstack-assessment.onrender.com/api/auth/login';
+
+  private readonly localApiUrl =
+    'https://enhanzer-fullstack-assessment.onrender.com/api/locations';
 
   private currentUserCompanyCode: string | null = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   get isAuthenticated(): boolean {
     return this.currentUserCompanyCode !== null;
@@ -30,8 +37,10 @@ export class AuthService {
     this.currentUserCompanyCode = null;
   }
 
-  login(credentials: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, credentials);
+  login(credentials: LoginRequest): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(
+      this.apiUrl,
+      credentials
+    );
   }
 }
-

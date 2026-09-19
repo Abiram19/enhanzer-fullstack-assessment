@@ -12,15 +12,18 @@ export interface CreatePurchaseBillRequest {
   providedIn: 'root'
 })
 export class PurchaseBillService {
-  private apiUrl = 'http://localhost:5260/api/PurchaseBills';
+  private apiUrl =
+    'https://enhanzer-fullstack-assessment.onrender.com/api/PurchaseBills';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   submitBill(request: CreatePurchaseBillRequest): Observable<any> {
     return this.http.post(this.apiUrl, request);
   }
 
   getLatestBill(companyCode: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}?companyCode=${encodeURIComponent(companyCode)}`);
+    return this.http.get(
+      `${this.apiUrl}?companyCode=${encodeURIComponent(companyCode)}`
+    );
   }
 }

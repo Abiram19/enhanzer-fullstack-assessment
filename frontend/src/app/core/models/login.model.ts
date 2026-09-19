@@ -1,14 +1,7 @@
-export interface LoginRequestBody {
-  Username: string;
-  Pw: string;
-}
-
+// Shape sent to the backend proxy: POST /api/auth/login
 export interface LoginRequest {
-  API_Action: string;
-  Device_Id: string;
-  Sync_Time: string;
-  Company_Code: string;
-  API_Body: LoginRequestBody[];
+  email: string;
+  password: string;
 }
 
 export interface LocationDto {
@@ -18,11 +11,10 @@ export interface LocationDto {
   location_Name?: string;
 }
 
+// Shape returned by the backend proxy (maps to ClientLoginResponseDto)
 export interface LoginResponse {
-  Status_Code: number;
-  Sync_Time: string | null;
-  Message: string | null;
-  User_Locations?: LocationDto[];
-  Response_Body: any;
+  success: boolean;
+  statusCode: number;
+  message: string | null;
+  companyCode?: string | null;
 }
-
