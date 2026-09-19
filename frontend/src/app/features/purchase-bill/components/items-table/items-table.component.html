@@ -1,0 +1,35 @@
+<div class="table-container">
+  <table class="items-table">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Batch</th>
+        <th class="text-right">Standard Cost</th>
+        <th class="text-right">Standard Price</th>
+        <th class="text-right">Margin</th>
+        <th class="text-right">Qty</th>
+        <th class="text-right">Free Qty</th>
+        <th class="text-right">Discount</th>
+        <th class="text-right">Total Cost</th>
+        <th class="text-right">Total Selling</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="items.length === 0">
+        <td colspan="10" class="text-center empty-message">No items added yet.</td>
+      </tr>
+      <tr *ngFor="let row of items">
+        <td>{{ row.item }}</td>
+        <td>{{ row.batch }}</td>
+        <td class="text-right">{{ row.standardCost | number:'1.2-2' }}</td>
+        <td class="text-right">{{ row.standardPrice | number:'1.2-2' }}</td>
+        <td class="text-right">{{ row.margin | number:'1.2-2' }}</td>
+        <td class="text-right">{{ row.qty }}</td>
+        <td class="text-right">{{ row.freeQty }}</td>
+        <td class="text-right">{{ row.discount | number:'1.2-2' }}</td>
+        <td class="text-right">{{ row.totalCost | number:'1.2-2' }}</td>
+        <td class="text-right">{{ row.totalSelling | number:'1.2-2' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

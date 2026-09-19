@@ -1,0 +1,133 @@
+<div class="item-entry-wrapper">
+  <form [formGroup]="itemForm" (ngSubmit)="onAdd()">
+    
+    <!-- Row 1: Item*, Batch, Standard Cost, Standard Price, Margin, Qty, Free Qty -->
+    <div class="form-row row-1">
+      <!-- Item -->
+      <div class="field-group field-item autocomplete-container">
+        <label>Item<span class="required">*</span></label>
+        <div class="input-with-icon">
+          <input 
+            type="text" 
+            formControlName="item" 
+            (focus)="showAutocomplete = true; filterItems(itemForm.get('item')?.value)"
+            (blur)="hideAutocomplete()"
+            [class.invalid]="itemForm.get('item')?.invalid && itemForm.get('item')?.touched"
+            autocomplete="off"
+          />
+          <span class="field-icon" title="Item List">
+            <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="#94a3b8" stroke-width="1.6">
+              <rect x="1.5" y="1.5" width="13" height="13" rx="1.5"></rect>
+              <line x1="4" y1="5" x2="12" y2="5"></line>
+              <line x1="4" y1="8" x2="12" y2="8"></line>
+              <line x1="4" y1="11" x2="12" y2="11"></line>
+            </svg>
+          </span>
+        </div>
+        
+        <!-- Autocomplete dropdown -->
+        <div class="autocomplete-dropdown" *ngIf="showAutocomplete && filteredItems.length > 0">
+          <div 
+            class="autocomplete-item" 
+            *ngFor="let option of filteredItems"
+            (mousedown)="selectItem(option)"
+          >
+            {{ option }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Batch -->
+      <div class="field-group field-batch">
+        <label>Batch</label>
+        <div class="select-container">
+          <select formControlName="batch" [class.invalid]="itemForm.get('batch')?.invalid && itemForm.get('batch')?.touched">
+            <option value=""></option>
+            <option *ngFor="let loc of locations" [value]="loc.location_Name || loc.Location_Name">
+              {{ loc.location_Name || loc.Location_Name }}
+            </option>
+          </select>
+          <span class="select-caret">▼</span>
+        </div>
+      </div>
+
+      <!-- Standard Cost -->
+      <div class="field-group field-cost">
+        <label>Standard Cost</label>
+        <input type="number" step="0.01" formControlName="standardCost" class="text-right" placeholder="0.00" />
+      </div>
+
+      <!-- Standard Price -->
+      <div class="field-group field-price">
+        <label>
+          Standard Price
+          <span class="badge-new">New +</span>
+        </label>
+        <input type="number" step="0.01" formControlName="standardPrice" class="text-right" placeholder="0.00" />
+      </div>
+
+      <!-- Margin (Readonly gray tile with label inside top-left and value bottom-right) -->
+      <div class="calc-tile field-margin">
+        <span class="tile-label">Margin</span>
+        <span class="tile-value" [class.has-value]="itemForm.get('margin')?.value">
+          {{ (itemForm.get('margin')?.value || 0) | number:'1.2-2' }}
+        </span>
+      </div>
+
+      <!-- Qty -->
+      <div class="field-group field-qty">
+        <label>Qty</label>
+        <input type="number" formControlName="qty" class="text-right" />
+      </div>
+
+      <!-- Free Qty -->
+      <div class="field-group field-free-qty">
+        <label>Free Qty</label>
+        <input type="number" formControlName="freeQty" class="text-right" />
+      </div>
+    </div>
+
+    <!-- Row 2: Discount, Total Cost, Total Selling, Add+ button -->
+    <div class="form-row row-2">
+      <!-- Discount -->
+      <div class="field-group field-discount">
+        <label>Discount</label>
+        <input 
+          type="number" 
+          step="0.01" 
+          formControlName="discount" 
+          class="text-right" 
+          placeholder="0.00" 
+        />
+      </div>
+
+      <!-- Total Cost (Readonly gray tile with label inside top-left and value bottom-right) -->
+      <div class="calc-tile field-total-cost">
+        <span class="tile-label">Total Cost</span>
+        <span class="tile-value" [class.has-value]="itemForm.get('totalCost')?.value">
+          {{ (itemForm.get('totalCost')?.value || 0) | number:'1.2-2' }}
+        </span>
+      </div>
+
+      <!-- Total Selling (Underline input with formatted 0.00) -->
+      <div class="field-group field-total-selling">
+        <label>Total Selling</label>
+        <input 
+          type="text" 
+          [value]="(itemForm.get('totalSelling')?.value || 0) | number:'1.2-2'" 
+          class="text-right" 
+          [class.text-muted]="!itemForm.get('totalSelling')?.value"
+          readonly 
+        />
+      </div>
+
+      <!-- Add+ Green Pill Button -->
+      <div class="field-add">
+        <button type="button" class="btn-add" (click)="onAdd()">
+          Add +
+        </button>
+      </div>
+    </div>
+
+  </form>
+</div>

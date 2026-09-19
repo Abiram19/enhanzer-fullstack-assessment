@@ -1,0 +1,16 @@
+# Node/Angular
+node_modules/
+dist/
+.angular/
+
+# .NET Core
+bin/
+obj/
+appsettings.Development.json
+
+# IDEs
+.vscode/
+.idea/
+*.suo
+*.user
+*.sln.docstates
