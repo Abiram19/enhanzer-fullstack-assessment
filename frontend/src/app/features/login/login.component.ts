@@ -52,7 +52,7 @@ export class LoginComponent {
       };
 
       this.authService.login(credentials).pipe(
-        timeout(20000),
+        timeout(90000),
         finalize(() => {
           this.isLoading = false;
           this.cdr.detectChanges();
