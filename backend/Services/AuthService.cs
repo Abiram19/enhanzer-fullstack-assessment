@@ -138,7 +138,8 @@ namespace EnhanzerAssessment.Api.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error occurred during external API authentication.");
-                return new ClientLoginResponseDto { Success = false, StatusCode = 500, Message = "An internal error occurred during authentication." };
+                string exactError = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                return new ClientLoginResponseDto { Success = false, StatusCode = 500, Message = $"Server Error: {exactError}" };
             }
         }
     }
