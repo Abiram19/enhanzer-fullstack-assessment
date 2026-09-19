@@ -3,7 +3,7 @@
 This project is a 2-page web application (Login & Purchase Bill Form) built with Angular (Frontend) and ASP.NET Core Web API (Backend) as per the Enhanzer assignment requirements.
 
 ## Technologies Used
-*   **Frontend:** Angular 17+, TypeScript, Tailwind CSS
+*   **Frontend:** Angular 22.1.8, TypeScript, Tailwind CSS
 *   **Backend:** ASP.NET Core (.NET 8), C#, Entity Framework Core
 *   **Database:** SQL Server
 *   **Architecture:** Component-based architecture (Angular), REST API
@@ -11,14 +11,14 @@ This project is a 2-page web application (Login & Purchase Bill Form) built with
 ## Prerequisites
 *   Node.js and npm
 *   .NET 8 SDK
-*   SQL Server (LocalDB or SQLEXPRESS)
+*   SQL Server Express (SQLEXPRESS)
 
 ## Setup Instructions
 
 ### 1. Database Setup
 1.  Open SQL Server Management Studio (SSMS) or Azure Data Studio.
 2.  Connect to your local SQL Server instance (e.g., `.\SQLEXPRESS`).
-3.  Execute the provided `database_script.sql` script located in the root directory. This will create the `EnhanzerAssessmentDb` database and the required tables (`Location_Details`, `PurchaseBills`, `PurchaseBillItems`).
+3.  Execute the provided `database/schema.sql` script. This will create the `EnhanzerAssessmentDb` database and the required tables (`Location_Details`, `PurchaseBills`, `PurchaseBillItems`).
 
 ### 2. Backend Setup (.NET Core API)
 1.  Navigate to the `backend` folder:
@@ -58,8 +58,8 @@ This project is a 2-page web application (Login & Purchase Bill Form) built with
 
 ## Features Implemented
 *   **Login Page:** Authenticates via the external `POS_Api/Invoke` endpoint. Captures `User_Locations` on success and inserts them into `Location_Details`.
-*   **Purchase Bill Form:** Protected by an Angular AuthGuard. Includes autocomplete for items, dynamic batch dropdowns loaded from the database, and real-time field calculations for gross total, discounts, tax, and net total.
-*   **Backend Storage:** Successfully maps and submits complex Purchase Bill requests using nested objects into SQL Server.
+*   **Purchase Bill Form:** Protected by an Angular AuthGuard. Includes autocomplete for 7 predefined items, dynamic batch dropdowns loaded from the database, and real-time calculations for Total Cost and Total Selling based on Qty, Discount, and Prices. Supports adding multiple items to a table and submitting them to the database.
+*   **Backend API:** Successfully maps, validates, and stores complex Purchase Bill requests using nested objects into SQL Server.
 
-## Important Note regarding Staging API
-During testing, the external staging API endpoint occasionally returned `"Invalid Login Details"` despite correct credentials. This application strictly implements the error handling to proxy this 401 response to the UI. If you experience login issues during evaluation, please ensure the external endpoint is accepting the provided `Welcome#5` password. 
+## External API Integration
+This application integrates with the provided Enhanzer staging POS API through a backend proxy to authenticate users and fetch their authorized locations. The system handles authentication failures gracefully and will display meaningful errors in the UI if the external service rejects the credentials or is currently unavailable.
