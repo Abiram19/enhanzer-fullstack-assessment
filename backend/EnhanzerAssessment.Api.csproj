@@ -1,10 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>EnhanzerAssessmentAPI2</AssemblyName>
+    <UserSecretsId>89bcdaee-cced-441e-a6d3-6a6cc6976e31</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
