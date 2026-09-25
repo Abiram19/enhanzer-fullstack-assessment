@@ -19,10 +19,68 @@ export interface PurchaseOrderItemChartDto {
   totalQuantity: number;
 }
 
+export interface TableWidgetRowDto {
+  orderNo: string;
+  product: string;
+  dueDate: string;
+  daysLate: string;
+  purchaseOrderId?: number;
+  netAmount?: number;
+  noOfItems?: number;
+}
+
+export interface TableWidgetDto {
+  title: string;
+  period: string;
+  subtitle: string;
+  headers: string[];
+  rows: TableWidgetRowDto[];
+}
+
+export interface ListWidgetItemDto {
+  title: string;
+  subtitle: string;
+  updatedText: string;
+  badgeText?: string | null;
+  amount: string;
+  isNegative?: boolean;
+  purchaseOrderId?: number;
+  quantity?: number;
+}
+
+export interface ListWidgetDto {
+  title: string;
+  period: string;
+  items: ListWidgetItemDto[];
+}
+
+export interface ChartSliceDto {
+  code: string;
+  label: string;
+  formattedValue: string;
+  value: number;
+  percentage: number;
+  color: string;
+}
+
+export interface ChartWidgetDto {
+  title: string;
+  period: string;
+  totalValue: string;
+  totalLabel: string;
+  slices: ChartSliceDto[];
+}
+
 export interface DashboardDataDto {
   latestPurchaseOrders: LatestPurchaseOrderDto[];
   oldestPurchaseOrderItems: OldestPurchaseOrderItemDto[];
   purchaseOrderItemChart: PurchaseOrderItemChartDto[];
+  tableWidget?: TableWidgetDto;
+  listWidget?: ListWidgetDto;
+  chartWidget?: ChartWidgetDto;
+  poTableWidget?: TableWidgetDto;
+  poListWidget?: ListWidgetDto;
+  poChartWidget?: ChartWidgetDto;
 }
 
 @Injectable({
@@ -32,8 +90,8 @@ export class DashboardService {
   constructor(private http: HttpClient) { }
 
   getDashboardData(companyCode: string): Observable<DashboardDataDto> {
-    return this.http.get<DashboardDataDto>(`https://enhanzer-fullstack-assessment.onrender.com/api/Dashboard?companyCode=${encodeURIComponent(companyCode)}`);
-
+    return this.http.get<DashboardDataDto>(
+      `https://enhanzer-fullstack-assessment.onrender.com/api/Dashboard?companyCode=${encodeURIComponent(companyCode)}`
+    );
   }
 }
-
