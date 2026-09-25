@@ -1,8 +1,8 @@
 /* ============================================================
-   eZuite Dashboard Component – 100% Screenshot Matching CSS
+   eZuite Dashboard Component – Live Data CSS
    ============================================================ */
 
-/* ── Host & Reset ────────────────────────────────────────── */
+/* ── Host & Reset ──────────────────────────────────────────── */
 :host {
   display: block;
   width: 100%;
@@ -20,7 +20,7 @@
   box-sizing: inherit;
 }
 
-/* ── Layout Root ─────────────────────────────────────────── */
+/* ── Layout Root ───────────────────────────────────────────── */
 .ez-app-container {
   display: flex;
   flex-direction: column;
@@ -30,7 +30,7 @@
 }
 
 /* ============================================================
-   1. TOP NAVIGATION BAR (eZuite Blue Header)
+   1. TOP NAVIGATION BAR
    ============================================================ */
 .ez-header {
   height: 52px;
@@ -43,7 +43,7 @@
   padding: 0 16px;
   flex-shrink: 0;
   z-index: 100;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
 }
 
 .ez-header-left {
@@ -52,7 +52,6 @@
   gap: 16px;
 }
 
-/* Brand Logo: » eZuite */
 .ez-brand {
   display: flex;
   align-items: center;
@@ -77,7 +76,7 @@
   line-height: 1;
 }
 
-/* Nav Dropdown Trigger: Dashboard fv ▾ */
+/* Nav Dropdown */
 .ez-nav-dropdown-wrap {
   position: relative;
 }
@@ -98,7 +97,7 @@
 }
 
 .ez-nav-dropdown-btn:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255,255,255,0.15);
 }
 
 .ez-caret {
@@ -107,17 +106,16 @@
   margin-left: 2px;
 }
 
-/* Nav Dropdown Menu */
 .ez-nav-dropdown-menu {
   position: absolute;
   top: 100%;
   left: 0;
   margin-top: 6px;
-  width: 290px;
+  width: 270px;
   background: #ffffff;
   color: #1a202c;
   border-radius: 6px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
   border: 1px solid #e2e8f0;
   padding: 8px 0;
   z-index: 200;
@@ -126,7 +124,7 @@
 
 @keyframes ez-drop-in {
   from { opacity: 0; transform: translateY(-4px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .ez-dropdown-header {
@@ -152,12 +150,12 @@
   color: #2d3748;
 }
 
-.ez-dropdown-item:hover {
-  background-color: #f7fafc;
-}
+.ez-dropdown-item:hover { background-color: #f7fafc; }
 
-.ez-dropdown-item.ez-active {
-  background-color: #ebf8ff;
+.ez-dropdown-divider {
+  height: 1px;
+  background-color: #edf2f7;
+  margin: 6px 0;
 }
 
 .ez-item-icon {
@@ -179,13 +177,7 @@
   margin-top: 2px;
 }
 
-.ez-dropdown-divider {
-  height: 1px;
-  background-color: #edf2f7;
-  margin: 6px 0;
-}
-
-/* Settings Square Button */
+/* Settings button */
 .ez-header-btn-square {
   width: 33px;
   height: 33px;
@@ -200,11 +192,9 @@
   transition: background 0.15s;
 }
 
-.ez-header-btn-square:hover {
-  background-color: #004d87;
-}
+.ez-header-btn-square:hover { background-color: #004d87; }
 
-/* Header Right Area */
+/* Header right */
 .ez-header-right {
   display: flex;
   align-items: center;
@@ -224,9 +214,7 @@
   transition: background 0.15s;
 }
 
-.ez-org-btn:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-}
+.ez-org-btn:hover { background-color: rgba(255,255,255,0.15); }
 
 .ez-icon-btn {
   color: #ffffff;
@@ -238,15 +226,9 @@
   transition: opacity 0.15s, transform 0.1s;
 }
 
-.ez-icon-btn:hover {
-  opacity: 1;
-  transform: scale(1.06);
-}
+.ez-icon-btn:hover { opacity: 1; transform: scale(1.06); }
 
-/* Notification Bell with Red Badge */
-.ez-bell-wrap {
-  position: relative;
-}
+.ez-bell-wrap { position: relative; }
 
 .ez-badge-red {
   position: absolute;
@@ -267,13 +249,12 @@
   border: 1px solid #0072ce;
 }
 
-/* User Avatar */
 .ez-avatar {
   width: 32px;
   height: 32px;
   border-radius: 50%;
   background-color: #003b6e;
-  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  border: 1.5px solid rgba(255,255,255,0.8);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -285,12 +266,10 @@
   transition: transform 0.12s;
 }
 
-.ez-avatar:hover {
-  transform: scale(1.05);
-}
+.ez-avatar:hover { transform: scale(1.05); }
 
 /* ============================================================
-   2. BODY CONTAINER (Sidebar + Workspace)
+   2. BODY CONTAINER
    ============================================================ */
 .ez-body {
   display: flex;
@@ -300,7 +279,7 @@
 }
 
 /* ============================================================
-   3. LEFT SIDEBAR (Dark Blue Vertical Icon Stack)
+   3. LEFT SIDEBAR
    ============================================================ */
 .ez-sidebar {
   width: 72px;
@@ -316,9 +295,7 @@
   z-index: 50;
 }
 
-.ez-sidebar::-webkit-scrollbar {
-  display: none;
-}
+.ez-sidebar::-webkit-scrollbar { display: none; }
 
 .ez-sidebar-nav {
   display: flex;
@@ -334,22 +311,17 @@
   padding: 7px 2px;
   color: #ffffff;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.15s;
   text-align: center;
 }
 
-.ez-side-item:hover {
-  background-color: rgba(255, 255, 255, 0.12);
-}
-
-.ez-side-item--active {
-  background-color: #003a66;
-}
+.ez-side-item:hover { background-color: rgba(255,255,255,0.12); }
+.ez-side-item--active { background-color: #003a66; }
 
 .ez-side-lbl {
   font-size: 9.5px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.92);
+  color: rgba(255,255,255,0.92);
   margin-top: 3px;
   letter-spacing: 0.1px;
 }
@@ -357,12 +329,12 @@
 .ez-sidebar-footer {
   padding: 10px 4px 14px;
   text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255,255,255,0.08);
 }
 
 .ez-version {
   font-size: 10px;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255,255,255,0.7);
   font-weight: 500;
 }
 
@@ -374,7 +346,7 @@
 }
 
 /* ============================================================
-   4. WORKSPACE & 3 CARDS
+   4. WORKSPACE & CARDS
    ============================================================ */
 .ez-workspace {
   flex: 1;
@@ -391,15 +363,11 @@
 }
 
 @media (max-width: 1200px) {
-  .ez-grid {
-    grid-template-columns: 1fr 1fr;
-  }
+  .ez-grid { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 768px) {
-  .ez-grid {
-    grid-template-columns: 1fr;
-  }
+  .ez-grid { grid-template-columns: 1fr; }
 }
 
 /* ============================================================
@@ -409,7 +377,7 @@
   background-color: #ffffff;
   border-radius: 6px;
   border: 1px solid #e5e9f0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.03);
   padding: 18px 22px;
   display: flex;
   flex-direction: column;
@@ -447,19 +415,16 @@
 }
 
 /* ============================================================
-   CARD 01 : DELAYED ORDERS (Table)
+   CARD 01 : LATEST PURCHASE ORDERS (Table)
    ============================================================ */
 .ez-card-lead {
-  font-size: 13.5px;
-  font-weight: 700;
-  color: #1a202c;
-  margin-top: 10px;
-  margin-bottom: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 12px;
 }
 
-.ez-table-wrap {
-  overflow-x: auto;
-}
+.ez-table-wrap { overflow-x: auto; }
 
 .ez-table {
   width: 100%;
@@ -483,130 +448,83 @@
   vertical-align: middle;
 }
 
-.ez-table tbody tr:last-child td {
-  border-bottom: none;
-}
+.ez-table tbody tr:last-child td { border-bottom: none; }
+.ez-table tbody tr:hover td { background-color: #fafbfc; }
 
-.ez-table tbody tr:hover td {
-  background-color: #fafbfc;
-}
-
-.ez-td-ord {
-  color: #4a5568;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.ez-td-prod {
-  color: #2d3748;
-  font-weight: 500;
-}
-
-.ez-td-date {
-  color: #718096;
-  white-space: nowrap;
-}
-
-.ez-td-late {
-  color: #d97706; /* Warm amber/orange as in screenshot */
-  font-weight: 600;
-  white-space: nowrap;
-}
+.ez-td-id   { color: #0072ce; font-weight: 600; white-space: nowrap; }
+.ez-td-amount { color: #1a202c; font-weight: 700; white-space: nowrap; }
+.ez-td-items  { color: #4a5568; font-weight: 500; text-align: center; }
 
 /* ============================================================
-   CARD 02 : BANK ACCOUNTS (List)
+   CARD 02 : PURCHASE ORDER ITEMS (List)
    ============================================================ */
-.ez-bank-list {
+.ez-list-items {
   display: flex;
   flex-direction: column;
 }
 
-.ez-bank-item {
+.ez-list-item {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  padding: 12px 0;
+  padding: 11px 0;
   border-bottom: 1px solid #f1f5f9;
 }
 
-.ez-bank-item:last-child {
-  border-bottom: none;
-}
+.ez-list-item:last-child { border-bottom: none; }
 
-.ez-bank-left {
+.ez-list-left {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
   min-width: 0;
   flex: 1;
 }
 
-.ez-bank-icon-box {
+.ez-list-icon-box {
   width: 32px;
   height: 32px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 2px;
+  background-color: #f7fafc;
+  border-radius: 6px;
 }
 
-.ez-bank-info {
+.ez-list-info {
   display: flex;
   flex-direction: column;
   min-width: 0;
 }
 
-.ez-bank-name {
-  font-size: 14px;
+.ez-list-name {
+  font-size: 13.5px;
   font-weight: 700;
   color: #1a202c;
-  line-height: 1.25;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.ez-bank-sub {
+.ez-list-sub {
   font-size: 11.5px;
   color: #718096;
-  margin-top: 3px;
-}
-
-.ez-bank-updated {
-  font-size: 10.5px;
-  color: #a0aec0;
   margin-top: 2px;
 }
 
-.ez-badge-reviewed {
-  background-color: #e6f9ed;
-  color: #166534;
-  font-size: 10.5px;
-  font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 12px;
-  display: inline-block;
-  margin-top: 5px;
-  align-self: flex-start;
-}
-
-.ez-bank-amount {
-  font-size: 13.5px;
+.ez-list-qty {
+  font-size: 13px;
   font-weight: 700;
-  color: #1a202c;
+  color: #0072ce;
   text-align: right;
   flex-shrink: 0;
   margin-left: 12px;
   white-space: nowrap;
 }
 
-.ez-amount--negative {
-  color: #e53e3e !important; /* Red for negative amount */
-}
-
 /* ============================================================
-   CARD 03 : EXPENSES (Donut Chart & Legend)
+   CARD 03 : ITEM DISTRIBUTION (Donut Chart)
    ============================================================ */
 .ez-chart-top-stat {
   text-align: right;
@@ -614,7 +532,7 @@
 }
 
 .ez-chart-total-val {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 700;
   color: #1a202c;
   line-height: 1;
@@ -635,7 +553,6 @@
   margin-top: 8px;
 }
 
-/* Donut Chart Ring */
 .ez-donut-wrap {
   display: flex;
   align-items: center;
@@ -644,40 +561,56 @@
 }
 
 .ez-donut {
-  width: 155px;
-  height: 155px;
+  width: 148px;
+  height: 148px;
   border-radius: 50%;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
 .ez-donut-hole {
-  width: 90px;
-  height: 90px;
+  width: 84px;
+  height: 84px;
   background-color: #ffffff;
   border-radius: 50%;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Legend */
+.ez-donut-centre-num {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a202c;
+  line-height: 1;
+}
+
+.ez-donut-centre-lbl {
+  font-size: 9px;
+  color: #718096;
+  margin-top: 2px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
 .ez-legend-list {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
   flex: 1;
   min-width: 0;
 }
 
-.ez-legend-item {
-  display: flex;
-  flex-direction: column;
-}
+.ez-legend-item { display: flex; flex-direction: column; }
 
 .ez-legend-amount {
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 700;
   color: #1a202c;
 }
@@ -704,10 +637,70 @@
   text-overflow: ellipsis;
 }
 
-/* Empty State */
+/* ============================================================
+   LOADING, ERROR & EMPTY STATES
+   ============================================================ */
+.ez-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  gap: 16px;
+  color: #718096;
+  font-size: 14px;
+}
+
+.ez-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #0072ce;
+  border-radius: 50%;
+  animation: ez-spin 0.8s linear infinite;
+}
+
+@keyframes ez-spin {
+  to { transform: rotate(360deg); }
+}
+
+.ez-error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  gap: 12px;
+  text-align: center;
+}
+
+.ez-error-icon { font-size: 36px; }
+
+.ez-error-msg {
+  font-size: 14px;
+  color: #e53e3e;
+  max-width: 400px;
+  line-height: 1.5;
+}
+
+.ez-retry-btn {
+  margin-top: 8px;
+  padding: 8px 20px;
+  background-color: #0072ce;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.ez-retry-btn:hover { background-color: #005aa0; }
+
 .ez-empty {
   text-align: center;
-  padding: 30px 10px;
+  padding: 28px 10px;
   color: #a0aec0;
   font-style: italic;
   font-size: 13px;

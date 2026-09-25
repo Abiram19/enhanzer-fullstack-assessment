@@ -1,51 +1,44 @@
 <div class="ez-app-container">
 
   <!-- ============================================================
-       TOP NAVIGATION BAR (eZuite Blue Header)
+       TOP NAVIGATION BAR
        ============================================================ -->
   <header class="ez-header">
     <div class="ez-header-left">
-      <!-- Logo: » eZuite -->
-      <div class="ez-brand" (click)="selectView('standard')">
+
+      <!-- Brand -->
+      <div class="ez-brand">
         <span class="ez-brand-chevron">»</span>
         <span class="ez-brand-name">eZuite</span>
       </div>
 
-      <!-- Dashboard fv dropdown -->
+      <!-- Dashboard nav dropdown -->
       <div class="ez-nav-dropdown-wrap">
         <button class="ez-nav-dropdown-btn" (click)="toggleDropdown()" type="button">
-          <!-- House / Home icon -->
-          <svg class="ez-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg class="ez-icon" viewBox="0 0 24 24" width="16" height="16" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
             <polyline points="9 22 9 12 15 12 15 22"></polyline>
           </svg>
-          <span class="ez-nav-title">{{ activeView === 'standard' ? 'Dashboard fv' : 'Purchase Orders View' }}</span>
+          <span class="ez-nav-title">Dashboard fv</span>
           <span class="ez-caret">▾</span>
         </button>
 
-        <!-- Dropdown menu -->
         <div *ngIf="dropdownOpen" class="ez-nav-dropdown-menu">
-          <div class="ez-dropdown-header">SWITCH VIEW</div>
-          <button class="ez-dropdown-item" [class.ez-active]="activeView === 'standard'" (click)="selectView('standard')">
-            <span class="ez-item-icon">★</span>
-            <div class="ez-item-text">
-              <strong>eZuite Standard (100% Mockup)</strong>
-              <small>Default screenshot layout and data</small>
-            </div>
-          </button>
-          <button class="ez-dropdown-item" [class.ez-active]="activeView === 'po'" (click)="selectView('po')">
-            <span class="ez-item-icon">📦</span>
-            <div class="ez-item-text">
-              <strong>Purchase Orders (Live Database)</strong>
-              <small>Real-time purchase bills from database</small>
-            </div>
-          </button>
-          <div class="ez-dropdown-divider"></div>
+          <div class="ez-dropdown-header">NAVIGATION</div>
           <button class="ez-dropdown-item" (click)="goToPurchaseBill()">
             <span class="ez-item-icon">📝</span>
             <div class="ez-item-text">
-              <strong>Go to Purchase Bill Page</strong>
-              <small>Create new purchase orders</small>
+              <strong>Purchase Bill</strong>
+              <small>Create &amp; manage purchase orders</small>
+            </div>
+          </button>
+          <div class="ez-dropdown-divider"></div>
+          <button class="ez-dropdown-item" (click)="loadData(); dropdownOpen=false">
+            <span class="ez-item-icon">🔄</span>
+            <div class="ez-item-text">
+              <strong>Refresh Dashboard</strong>
+              <small>Reload live data from database</small>
             </div>
           </button>
         </div>
@@ -53,7 +46,8 @@
 
       <!-- Settings Square Button -->
       <button class="ez-header-btn-square" title="Dashboard Settings" type="button">
-        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="3"></circle>
           <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
         </svg>
@@ -61,9 +55,10 @@
     </div>
 
     <div class="ez-header-right">
-      <!-- My Organization dropdown -->
+      <!-- My Organization -->
       <div class="ez-org-btn">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
           <line x1="3" y1="9" x2="21" y2="9"></line>
           <line x1="9" y1="21" x2="9" y2="9"></line>
@@ -72,86 +67,85 @@
         <span class="ez-caret">▾</span>
       </div>
 
-      <!-- Notification Bell with red badge 29 -->
+      <!-- Notification Bell -->
       <div class="ez-icon-btn ez-bell-wrap" title="Notifications">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
           <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
         </svg>
         <span class="ez-badge-red">29</span>
       </div>
 
-      <!-- Equalizer / Sliders -->
-      <div class="ez-icon-btn" title="Filter / Sliders">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="4" y1="21" x2="4" y2="14"></line>
-          <line x1="4" y1="10" x2="4" y2="3"></line>
-          <line x1="12" y1="21" x2="12" y2="12"></line>
-          <line x1="12" y1="8" x2="12" y2="3"></line>
-          <line x1="20" y1="21" x2="20" y2="16"></line>
-          <line x1="20" y1="12" x2="20" y2="3"></line>
-          <line x1="1" y1="14" x2="7" y2="14"></line>
-          <line x1="9" y1="8" x2="15" y2="8"></line>
+      <!-- Sliders -->
+      <div class="ez-icon-btn" title="Filters">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line>
+          <line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line>
+          <line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line>
           <line x1="17" y1="16" x2="23" y2="16"></line>
         </svg>
       </div>
 
-      <!-- Help (?) -->
-      <div class="ez-icon-btn" title="Help & Support">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Help -->
+      <div class="ez-icon-btn" title="Help">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="10"></circle>
           <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
           <line x1="12" y1="17" x2="12.01" y2="17"></line>
         </svg>
       </div>
 
-      <!-- User Avatar 'A' -->
-      <div class="ez-avatar" title="User Profile">
-        <span>A</span>
-      </div>
+      <!-- User Avatar -->
+      <div class="ez-avatar" title="User Profile"><span>A</span></div>
     </div>
   </header>
 
   <!-- ============================================================
-       BODY (Sidebar + 3 Dashboard Cards)
+       BODY: Sidebar + Dashboard Content
        ============================================================ -->
   <div class="ez-body">
 
-    <!-- ── Left Sidebar (Dark Blue vertical icon stack) ───────── -->
+    <!-- Left Sidebar -->
     <aside class="ez-sidebar">
       <div class="ez-sidebar-nav">
 
-        <!-- Shortcuts -->
-        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar === 'Shortcuts'" (click)="onSidebarClick(sidebarItems[0])">
-          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar==='Shortcuts'"
+             (click)="onSidebarClick(sidebarItems[0])">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
           </svg>
           <span class="ez-side-lbl">Shortcuts</span>
         </div>
 
-        <!-- Core -->
-        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar === 'Core'" (click)="onSidebarClick(sidebarItems[1])">
-          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="7" height="7"></rect>
-            <rect x="14" y="3" width="7" height="7"></rect>
-            <rect x="14" y="14" width="7" height="7"></rect>
-            <rect x="3" y="14" width="7" height="7"></rect>
+        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar==='Core'"
+             (click)="onSidebarClick(sidebarItems[1])">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect>
           </svg>
           <span class="ez-side-lbl">Core</span>
         </div>
 
-        <!-- Finance -->
-        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar === 'Finance'" (click)="onSidebarClick(sidebarItems[2])">
-          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar==='Finance'"
+             (click)="onSidebarClick(sidebarItems[2])">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
+               stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <line x1="12" y1="1" x2="12" y2="23"></line>
             <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
           </svg>
           <span class="ez-side-lbl">Finance</span>
         </div>
 
-        <!-- Assets -->
-        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar === 'Assets'" (click)="onSidebarClick(sidebarItems[3])">
-          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar==='Assets'"
+             (click)="onSidebarClick(sidebarItems[3])">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
+               stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
             <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
             <line x1="12" y1="22.08" x2="12" y2="12"></line>
@@ -159,19 +153,21 @@
           <span class="ez-side-lbl">Assets</span>
         </div>
 
-        <!-- Procurement (Routes to /purchase-bill) -->
-        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar === 'Procurement'" (click)="onSidebarClick(sidebarItems[4])" title="Purchase Bill & Procurement">
-          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="9" cy="21" r="1"></circle>
-            <circle cx="20" cy="21" r="1"></circle>
+        <!-- Procurement – navigates to Purchase Bill -->
+        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar==='Procurement'"
+             (click)="onSidebarClick(sidebarItems[4])" title="Purchase Bill">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
           </svg>
           <span class="ez-side-lbl">Procurement</span>
         </div>
 
-        <!-- Inventory -->
-        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar === 'Inventory'" (click)="onSidebarClick(sidebarItems[5])">
-          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar==='Inventory'"
+             (click)="onSidebarClick(sidebarItems[5])">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
+               stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="21 8 21 21 3 21 3 8"></polyline>
             <rect x="1" y="3" width="22" height="5"></rect>
             <line x1="10" y1="12" x2="14" y2="12"></line>
@@ -179,18 +175,20 @@
           <span class="ez-side-lbl">Inventory</span>
         </div>
 
-        <!-- Manufacturing -->
-        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar === 'Manufacturing'" (click)="onSidebarClick(sidebarItems[6])">
-          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar==='Manufacturing'"
+             (click)="onSidebarClick(sidebarItems[6])">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
+               stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="3"></circle>
             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
           </svg>
           <span class="ez-side-lbl">Manufacturing</span>
         </div>
 
-        <!-- Sales -->
-        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar === 'Sales'" (click)="onSidebarClick(sidebarItems[7])">
-          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar==='Sales'"
+             (click)="onSidebarClick(sidebarItems[7])">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
+               stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <path d="M16 10a4 4 0 0 1-8 0"></path>
@@ -198,9 +196,10 @@
           <span class="ez-side-lbl">Sales</span>
         </div>
 
-        <!-- CRM -->
-        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar === 'CRM'" (click)="onSidebarClick(sidebarItems[8])">
-          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar==='CRM'"
+             (click)="onSidebarClick(sidebarItems[8])">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
+               stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
             <circle cx="9" cy="7" r="4"></circle>
             <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
@@ -209,38 +208,41 @@
           <span class="ez-side-lbl">CRM</span>
         </div>
 
-        <!-- Services -->
-        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar === 'Services'" (click)="onSidebarClick(sidebarItems[9])">
-          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar==='Services'"
+             (click)="onSidebarClick(sidebarItems[9])">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
+               stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
             <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
           </svg>
           <span class="ez-side-lbl">Services</span>
         </div>
 
-        <!-- Docs -->
-        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar === 'Docs'" (click)="onSidebarClick(sidebarItems[10])">
-          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar==='Docs'"
+             (click)="onSidebarClick(sidebarItems[10])">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
+               stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
             <polyline points="14 2 14 8 20 8"></polyline>
             <line x1="16" y1="13" x2="8" y2="13"></line>
             <line x1="16" y1="17" x2="8" y2="17"></line>
-            <polyline points="10 9 9 9 8 9"></polyline>
           </svg>
           <span class="ez-side-lbl">Docs</span>
         </div>
 
-        <!-- Analytics -->
-        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar === 'Analytics'" (click)="onSidebarClick(sidebarItems[11])">
-          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar==='Analytics'"
+             (click)="onSidebarClick(sidebarItems[11])">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
           </svg>
           <span class="ez-side-lbl">Analytics</span>
         </div>
 
-        <!-- Admin -->
-        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar === 'Admin'" (click)="onSidebarClick(sidebarItems[12])">
-          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <div class="ez-side-item" [class.ez-side-item--active]="activeSidebar==='Admin'"
+             (click)="onSidebarClick(sidebarItems[12])">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
+               stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
           </svg>
           <span class="ez-side-lbl">Admin</span>
@@ -248,47 +250,62 @@
 
       </div>
 
-      <!-- Version & Copyright -->
       <div class="ez-sidebar-footer">
         <div class="ez-version">V 5.0</div>
         <div class="ez-copyright">© eZuite</div>
       </div>
     </aside>
 
-    <!-- ── Main Dashboard Workspace ───────────────────────────── -->
+    <!-- ── Main Dashboard Workspace ─────────────────────────── -->
     <main class="ez-workspace">
-      <div class="ez-grid">
+
+      <!-- Loading state -->
+      <div *ngIf="loading" class="ez-loading">
+        <div class="ez-spinner"></div>
+        <span>Loading dashboard data…</span>
+      </div>
+
+      <!-- Error state -->
+      <div *ngIf="!loading && error" class="ez-error-state">
+        <div class="ez-error-icon">⚠️</div>
+        <div class="ez-error-msg">{{ error }}</div>
+        <button class="ez-retry-btn" (click)="loadData()">Retry</button>
+      </div>
+
+      <!-- Dashboard grid (shown when data loaded successfully) -->
+      <div *ngIf="!loading && !error" class="ez-grid">
 
         <!-- ============================================================
-             CARD 01 : DELAYED ORDERS (Table View)
+             WIDGET 01 – Latest 5 Purchase Orders (Table View)
              ============================================================ -->
         <div class="ez-card ez-card--table">
           <div class="ez-card-head">
-            <h2 class="ez-card-title">{{ currentTable.title }}</h2>
+            <h2 class="ez-card-title">Latest Purchase Orders</h2>
             <div class="ez-card-period">
-              <span>{{ currentTable.period }}</span>
+              <span>Recent</span>
               <span class="ez-card-period-chevron">⌄</span>
             </div>
           </div>
 
-          <div class="ez-card-lead">{{ currentTable.subtitle }}</div>
+          <div class="ez-card-lead">{{ latestPOs.length }} purchase orders found</div>
 
           <div class="ez-table-wrap">
             <table class="ez-table">
               <thead>
                 <tr>
-                  <th *ngFor="let h of currentTable.headers">{{ h }}</th>
+                  <th>ID</th>
+                  <th>Net Amount</th>
+                  <th>No. of Items</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let row of currentTable.rows">
-                  <td class="ez-td-ord">{{ row.orderNo }}</td>
-                  <td class="ez-td-prod">{{ row.product }}</td>
-                  <td class="ez-td-date">{{ row.dueDate }}</td>
-                  <td class="ez-td-late">{{ row.daysLate }}</td>
+                <tr *ngFor="let po of latestPOs">
+                  <td class="ez-td-id">PO-{{ po.id }}</td>
+                  <td class="ez-td-amount">{{ po.netAmount | number:'1.2-2' }}</td>
+                  <td class="ez-td-items">{{ po.noOfItems }}</td>
                 </tr>
-                <tr *ngIf="currentTable.rows.length === 0">
-                  <td colspan="4" class="ez-empty">No orders found.</td>
+                <tr *ngIf="latestPOs.length === 0">
+                  <td colspan="3" class="ez-empty">No purchase orders found.</td>
                 </tr>
               </tbody>
             </table>
@@ -296,100 +313,87 @@
         </div>
 
         <!-- ============================================================
-             CARD 02 : BANK ACCOUNTS (List View)
+             WIDGET 02 – Oldest 10 Purchase Order Items (List View)
              ============================================================ -->
         <div class="ez-card ez-card--list">
           <div class="ez-card-head">
-            <h2 class="ez-card-title">{{ currentList.title }}</h2>
+            <h2 class="ez-card-title">Purchase Order Items</h2>
             <div class="ez-card-period">
-              <span>{{ currentList.period }}</span>
+              <span>Oldest 10</span>
               <span class="ez-card-period-chevron">⌄</span>
             </div>
           </div>
 
-          <div class="ez-bank-list">
-            <div *ngFor="let item of currentList.items" class="ez-bank-item">
-              <div class="ez-bank-left">
-                <!-- Classical Bank 🏛️ Icon -->
-                <div class="ez-bank-icon-box">
-                  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#718096" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                    <!-- Pediment roof -->
-                    <polygon points="12 2 2 7 22 7"></polygon>
-                    <!-- Entablature beam -->
-                    <rect x="3" y="7" width="18" height="2" fill="#718096"></rect>
-                    <!-- 4 Columns -->
-                    <line x1="5" y1="9" x2="5" y2="18" stroke-width="2.2"></line>
-                    <line x1="9.5" y1="9" x2="9.5" y2="18" stroke-width="2.2"></line>
-                    <line x1="14.5" y1="9" x2="14.5" y2="18" stroke-width="2.2"></line>
-                    <line x1="19" y1="9" x2="19" y2="18" stroke-width="2.2"></line>
-                    <!-- Base plinth -->
-                    <rect x="2" y="18" width="20" height="3" rx="0.5" fill="#718096"></rect>
+          <div class="ez-list-items">
+            <div *ngFor="let item of oldestItems" class="ez-list-item">
+              <div class="ez-list-left">
+                <!-- Item icon -->
+                <div class="ez-list-icon-box">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#718096"
+                       stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
                   </svg>
                 </div>
-
-                <div class="ez-bank-info">
-                  <div class="ez-bank-name">{{ item.title }}</div>
-                  <div class="ez-bank-sub">{{ item.subtitle }}</div>
-                  <div class="ez-bank-updated">{{ item.updatedText }}</div>
-                  <div *ngIf="item.badgeText" class="ez-badge-reviewed">
-                    {{ item.badgeText }}
-                  </div>
+                <div class="ez-list-info">
+                  <div class="ez-list-name">{{ item.itemName }}</div>
+                  <div class="ez-list-sub">Purchase Order #{{ item.purchaseOrderId }}</div>
                 </div>
               </div>
-
-              <div class="ez-bank-amount" [class.ez-amount--negative]="item.isNegative">
-                {{ item.amount }}
-              </div>
+              <div class="ez-list-qty">{{ item.noOfQuantity }} Qty</div>
             </div>
 
-            <div *ngIf="currentList.items.length === 0" class="ez-empty">
-              No accounts found.
+            <div *ngIf="oldestItems.length === 0" class="ez-empty">
+              No purchase order items found.
             </div>
           </div>
         </div>
 
         <!-- ============================================================
-             CARD 03 : EXPENSES (Donut Chart & Legend)
+             WIDGET 03 – Item Quantity Distribution (Donut Chart)
              ============================================================ -->
         <div class="ez-card ez-card--chart">
           <div class="ez-card-head">
-            <h2 class="ez-card-title">{{ currentChart.title }}</h2>
+            <h2 class="ez-card-title">Item Distribution</h2>
             <div class="ez-card-period">
-              <span>{{ currentChart.period }}</span>
+              <span>All Time</span>
               <span class="ez-card-period-chevron">⌄</span>
             </div>
           </div>
 
-          <!-- Total expense amount on top right -->
           <div class="ez-chart-top-stat">
-            <div class="ez-chart-total-val">{{ currentChart.totalValue }}</div>
-            <div class="ez-chart-total-lbl">{{ currentChart.totalLabel }}</div>
+            <div class="ez-chart-total-val">{{ totalQty }}</div>
+            <div class="ez-chart-total-lbl">Total items quantity</div>
           </div>
 
-          <!-- Donut + Legend Split -->
           <div class="ez-chart-body">
-            <!-- Donut Chart Ring -->
+            <!-- Donut Ring -->
             <div class="ez-donut-wrap">
               <div class="ez-donut" [style.background]="chartBackground">
-                <div class="ez-donut-hole"></div>
-              </div>
-            </div>
-
-            <!-- Legend Items -->
-            <div class="ez-legend-list">
-              <div *ngFor="let slice of currentChart.slices" class="ez-legend-item">
-                <div class="ez-legend-amount">{{ slice.formattedValue }}</div>
-                <div class="ez-legend-desc">
-                  <span class="ez-legend-dot" [style.background-color]="slice.color"></span>
-                  <span class="ez-legend-label">{{ slice.label }}</span>
+                <div class="ez-donut-hole">
+                  <span class="ez-donut-centre-num">{{ totalQty }}</span>
+                  <span class="ez-donut-centre-lbl">Units</span>
                 </div>
               </div>
             </div>
-          </div>
 
+            <!-- Legend -->
+            <div class="ez-legend-list">
+              <div *ngFor="let slice of chartSlices" class="ez-legend-item">
+                <div class="ez-legend-amount">{{ slice.totalQuantity }} Units</div>
+                <div class="ez-legend-desc">
+                  <span class="ez-legend-dot" [style.background-color]="slice.color"></span>
+                  <span class="ez-legend-label">{{ slice.itemName }}</span>
+                </div>
+              </div>
+              <div *ngIf="chartSlices.length === 0" class="ez-empty">
+                No chart data available.
+              </div>
+            </div>
+          </div>
         </div>
 
       </div><!-- /ez-grid -->
+
     </main>
-  </div>
-</div>
+  </div><!-- /ez-body -->
+</div><!-- /ez-app-container -->

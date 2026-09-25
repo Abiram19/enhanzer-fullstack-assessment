@@ -2,101 +2,44 @@ using System.Collections.Generic;
 
 namespace EnhanzerAssessment.Api.DTOs
 {
-    // Raw PO models (maintains 100% backwards compatibility with assignment requirements)
-    public class LatestPurchaseOrderDto
+    // ── Widget 01 : Latest Purchase Orders (Table) ──────────────────────
+    public class LatestPORowDto
     {
         public int Id { get; set; }
         public decimal NetAmount { get; set; }
         public int NoOfItems { get; set; }
     }
 
-    public class OldestPurchaseOrderItemDto
+    // ── Widget 02 : Oldest Purchase Order Items (List) ───────────────────
+    public class OldestPOItemRowDto
     {
         public int PurchaseOrderId { get; set; }
         public string ItemName { get; set; } = string.Empty;
         public int NoOfQuantity { get; set; }
     }
 
-    public class PurchaseOrderItemChartDto
+    // ── Widget 03 : Item Quantity Distribution (Donut Chart) ─────────────
+    public class ItemChartSliceDto
     {
         public string ItemName { get; set; } = string.Empty;
         public int TotalQuantity { get; set; }
-    }
-
-    // Configurable Widget DTOs matching the eZuite dashboard screenshot 100%
-    public class TableWidgetRowDto
-    {
-        public string OrderNo { get; set; } = string.Empty;
-        public string Product { get; set; } = string.Empty;
-        public string DueDate { get; set; } = string.Empty;
-        public string DaysLate { get; set; } = string.Empty;
-        public int? PurchaseOrderId { get; set; }
-        public decimal? NetAmount { get; set; }
-        public int? NoOfItems { get; set; }
-    }
-
-    public class TableWidgetDto
-    {
-        public string Title { get; set; } = "Delayed Orders";
-        public string Period { get; set; } = "Today";
-        public string Subtitle { get; set; } = "5 orders delayed";
-        public List<string> Headers { get; set; } = new() { "Order No", "Product", "Due Date", "Days Late" };
-        public List<TableWidgetRowDto> Rows { get; set; } = new();
-    }
-
-    public class ListWidgetItemDto
-    {
-        public string Title { get; set; } = string.Empty;
-        public string Subtitle { get; set; } = string.Empty;
-        public string UpdatedText { get; set; } = string.Empty;
-        public string? BadgeText { get; set; }
-        public string Amount { get; set; } = string.Empty;
-        public bool IsNegative { get; set; }
-        public int? PurchaseOrderId { get; set; }
-        public int? Quantity { get; set; }
-    }
-
-    public class ListWidgetDto
-    {
-        public string Title { get; set; } = "Bank Accounts";
-        public string Period { get; set; } = "Today";
-        public List<ListWidgetItemDto> Items { get; set; } = new();
-    }
-
-    public class ChartSliceDto
-    {
-        public string Code { get; set; } = string.Empty;
-        public string Label { get; set; } = string.Empty;
-        public string FormattedValue { get; set; } = string.Empty;
-        public decimal Value { get; set; }
-        public double Percentage { get; set; }
         public string Color { get; set; } = string.Empty;
+        public double Percentage { get; set; }
     }
 
-    public class ChartWidgetDto
-    {
-        public string Title { get; set; } = "Expenses";
-        public string Period { get; set; } = "Today";
-        public string TotalValue { get; set; } = "$18,000.00";
-        public string TotalLabel { get; set; } = "Total expenses";
-        public List<ChartSliceDto> Slices { get; set; } = new();
-    }
-
+    // ── Top-level response ────────────────────────────────────────────────
     public class DashboardDataDto
     {
-        // Raw PO collections from database
-        public List<LatestPurchaseOrderDto> LatestPurchaseOrders { get; set; } = new();
-        public List<OldestPurchaseOrderItemDto> OldestPurchaseOrderItems { get; set; } = new();
-        public List<PurchaseOrderItemChartDto> PurchaseOrderItemChart { get; set; } = new();
+        /// <summary>Latest 5 Purchase Orders (Widget 01 – Table View)</summary>
+        public List<LatestPORowDto> LatestPurchaseOrders { get; set; } = new();
 
-        // 100% Configurable Widgets matching eZuite Dashboard design
-        public TableWidgetDto TableWidget { get; set; } = new();
-        public ListWidgetDto ListWidget { get; set; } = new();
-        public ChartWidgetDto ChartWidget { get; set; } = new();
+        /// <summary>Oldest 10 Purchase Order Items (Widget 02 – List View)</summary>
+        public List<OldestPOItemRowDto> OldestPurchaseOrderItems { get; set; } = new();
 
-        // Mapped Purchase Order Widgets formatted in the exact same eZuite layout
-        public TableWidgetDto PoTableWidget { get; set; } = new();
-        public ListWidgetDto PoListWidget { get; set; } = new();
-        public ChartWidgetDto PoChartWidget { get; set; } = new();
+        /// <summary>All items grouped by name with total quantity (Widget 03 – Donut Chart)</summary>
+        public List<ItemChartSliceDto> ItemChart { get; set; } = new();
+
+        /// <summary>Grand total quantity – used as the donut centre label</summary>
+        public int TotalItemQuantity { get; set; }
     }
 }

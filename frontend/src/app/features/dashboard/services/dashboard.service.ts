@@ -1,97 +1,46 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-export interface LatestPurchaseOrderDto {
+// ── DTOs matching backend DashboardDataDto ─────────────────────────────────
+
+export interface LatestPORowDto {
   id: number;
   netAmount: number;
   noOfItems: number;
 }
 
-export interface OldestPurchaseOrderItemDto {
+export interface OldestPOItemRowDto {
   purchaseOrderId: number;
   itemName: string;
   noOfQuantity: number;
 }
 
-export interface PurchaseOrderItemChartDto {
+export interface ItemChartSliceDto {
   itemName: string;
   totalQuantity: number;
-}
-
-export interface TableWidgetRowDto {
-  orderNo: string;
-  product: string;
-  dueDate: string;
-  daysLate: string;
-  purchaseOrderId?: number;
-  netAmount?: number;
-  noOfItems?: number;
-}
-
-export interface TableWidgetDto {
-  title: string;
-  period: string;
-  subtitle: string;
-  headers: string[];
-  rows: TableWidgetRowDto[];
-}
-
-export interface ListWidgetItemDto {
-  title: string;
-  subtitle: string;
-  updatedText: string;
-  badgeText?: string | null;
-  amount: string;
-  isNegative?: boolean;
-  purchaseOrderId?: number;
-  quantity?: number;
-}
-
-export interface ListWidgetDto {
-  title: string;
-  period: string;
-  items: ListWidgetItemDto[];
-}
-
-export interface ChartSliceDto {
-  code: string;
-  label: string;
-  formattedValue: string;
-  value: number;
-  percentage: number;
   color: string;
-}
-
-export interface ChartWidgetDto {
-  title: string;
-  period: string;
-  totalValue: string;
-  totalLabel: string;
-  slices: ChartSliceDto[];
+  percentage: number;
 }
 
 export interface DashboardDataDto {
-  latestPurchaseOrders: LatestPurchaseOrderDto[];
-  oldestPurchaseOrderItems: OldestPurchaseOrderItemDto[];
-  purchaseOrderItemChart: PurchaseOrderItemChartDto[];
-  tableWidget?: TableWidgetDto;
-  listWidget?: ListWidgetDto;
-  chartWidget?: ChartWidgetDto;
-  poTableWidget?: TableWidgetDto;
-  poListWidget?: ListWidgetDto;
-  poChartWidget?: ChartWidgetDto;
+  latestPurchaseOrders: LatestPORowDto[];
+  oldestPurchaseOrderItems: OldestPOItemRowDto[];
+  itemChart: ItemChartSliceDto[];
+  totalItemQuantity: number;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+// ── Service ────────────────────────────────────────────────────────────────
+
+@Injectable({ providedIn: 'root' })
 export class DashboardService {
-  constructor(private http: HttpClient) { }
+  /** Local backend – runs on http://localhost:5260 */
+  private readonly apiBase = 'http://localhost:5260/api/Dashboard';
+
+  constructor(private http: HttpClient) {}
 
   getDashboardData(companyCode: string): Observable<DashboardDataDto> {
-    return this.http.get<DashboardDataDto>(
-      `https://enhanzer-fullstack-assessment.onrender.com/api/Dashboard?companyCode=${encodeURIComponent(companyCode)}`
-    );
+    const params = new HttpParams().set('companyCode', companyCode);
+    return this.http.get<DashboardDataDto>(this.apiBase, { params });
   }
 }
