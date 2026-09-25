@@ -1,0 +1,601 @@
+/* ==========================================================================
+   eZuite Dashboard Component Styles
+   ========================================================================== */
+
+:host {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #2d3748;
+}
+
+.ezuite-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background-color: #f0f3f7;
+}
+
+/* --------------------------------------------------------------------------
+   1. TOP NAVIGATION BAR
+   -------------------------------------------------------------------------- */
+.ezuite-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  background-color: #0088cc;
+  padding: 0 16px;
+  color: #ffffff;
+  user-select: none;
+  z-index: 100;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.brand-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.brand-text {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  color: #ffffff;
+}
+
+.topbar-center {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dashboard-selector {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.15s ease;
+}
+
+.dashboard-selector:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.nav-home-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.selector-title {
+  color: #ffffff;
+}
+
+.chevron-down {
+  width: 14px;
+  height: 14px;
+  opacity: 0.9;
+}
+
+.settings-gear-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background-color: #0073b6;
+  border: none;
+  border-radius: 4px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.settings-gear-btn:hover {
+  background-color: #00639d;
+}
+
+.settings-gear-btn svg {
+  width: 17px;
+  height: 17px;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.org-selector {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.org-selector:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.org-icon {
+  width: 15px;
+  height: 15px;
+}
+
+.notification-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.top-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  transition: background-color 0.15s ease;
+}
+
+.top-icon-btn:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.top-icon-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background-color: #e53935;
+  color: #ffffff;
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 1px 4px;
+  border-radius: 8px;
+  line-height: 1.1;
+  border: 1px solid #0088cc;
+}
+
+.user-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 27px;
+  height: 27px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  color: #0088cc;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+/* --------------------------------------------------------------------------
+   2. MAIN CONTAINER & SIDEBAR
+   -------------------------------------------------------------------------- */
+.ezuite-main {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 48px);
+  overflow: hidden;
+}
+
+.ezuite-sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 66px;
+  min-width: 66px;
+  background-color: #005088;
+  user-select: none;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.ezuite-sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 4px;
+  cursor: pointer;
+  color: #ffffff;
+  transition: background-color 0.15s ease;
+  border-left: 3px solid transparent;
+}
+
+.nav-tab:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.nav-tab.active {
+  background-color: #0060a0;
+  border-left-color: #ffffff;
+}
+
+.nav-tab svg {
+  width: 19px;
+  height: 19px;
+  stroke: #ffffff;
+  margin-bottom: 3px;
+}
+
+.nav-label {
+  font-size: 9.5px;
+  font-weight: 500;
+  text-align: center;
+  color: #ffffff;
+  line-height: 1.1;
+  letter-spacing: 0.1px;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 4px 12px;
+  gap: 3px;
+}
+
+.version-text {
+  font-size: 9.5px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.copyright-text {
+  font-size: 8.5px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* --------------------------------------------------------------------------
+   3. CONTENT AREA & DASHBOARD CARDS
+   -------------------------------------------------------------------------- */
+.ezuite-content {
+  flex: 1;
+  padding: 18px 20px;
+  overflow-y: auto;
+  background-color: #f0f3f7;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+
+@media (max-width: 1200px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dashboard-card {
+  background-color: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 480px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #4a5568;
+  margin: 0;
+}
+
+.timeframe-select {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.timeframe-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #0088cc;
+}
+
+.chevron-blue {
+  width: 14px;
+  height: 14px;
+  color: #0088cc;
+}
+
+/* --------------------------------------------------------------------------
+   CARD 1: DELAYED ORDERS
+   -------------------------------------------------------------------------- */
+.card-subtitle-bar {
+  margin: 12px 0 14px;
+}
+
+.counter-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.orders-table th {
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #0077b6;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.orders-table td {
+  padding: 12px 8px;
+  color: #4a5568;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.orders-table tbody tr:nth-child(even) {
+  background-color: #fafbfc;
+}
+
+.orders-table tbody tr:hover {
+  background-color: #f0f7ff;
+}
+
+.td-orderno {
+  font-weight: 500;
+  color: #4a5568;
+  white-space: nowrap;
+}
+
+.td-product {
+  color: #2d3748;
+}
+
+.td-date {
+  color: #4a5568;
+  white-space: nowrap;
+}
+
+.td-days {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.days-high {
+  color: #e53935; /* Red for >= 10 days */
+}
+
+.days-medium {
+  color: #e67e22; /* Orange/amber for 4-9 days */
+}
+
+.days-low {
+  color: #4b5563; /* Charcoal for < 4 days */
+}
+
+/* --------------------------------------------------------------------------
+   CARD 2: BANK ACCOUNTS
+   -------------------------------------------------------------------------- */
+.bank-accounts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.bank-account-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f8fafc;
+}
+
+.bank-account-item:last-child {
+  border-bottom: none;
+}
+
+.bank-icon-box {
+  width: 26px;
+  height: 26px;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bank-svg {
+  width: 24px;
+  height: 24px;
+}
+
+.bank-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bank-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a202c;
+  line-height: 1.2;
+}
+
+.bank-source {
+  font-size: 11px;
+  color: #4a5568;
+}
+
+.bank-updated {
+  font-size: 10px;
+  color: #a0aec0;
+}
+
+.reviewed-pill {
+  align-self: flex-start;
+  background-color: #dcfce7;
+  color: #16a34a;
+  border-radius: 3px;
+  padding: 1px 6px;
+  font-size: 9.5px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.bank-balance {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a202c;
+  white-space: nowrap;
+}
+
+.balance-negative {
+  color: #e53935;
+}
+
+/* --------------------------------------------------------------------------
+   CARD 3: EXPENSES
+   -------------------------------------------------------------------------- */
+.expenses-summary-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 4px;
+  margin-bottom: 16px;
+}
+
+.expenses-total-val {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a202c;
+  line-height: 1.1;
+}
+
+.expenses-total-lbl {
+  font-size: 11px;
+  color: #718096;
+}
+
+.expenses-chart-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.donut-chart-wrapper {
+  width: 140px;
+  height: 140px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.donut-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg); /* Start from 12 o'clock */
+}
+
+.expenses-legend {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.legend-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.legend-amount {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a202c;
+}
+
+.legend-label-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-name {
+  font-size: 11.5px;
+  color: #4a5568;
+  white-space: nowrap;
+}

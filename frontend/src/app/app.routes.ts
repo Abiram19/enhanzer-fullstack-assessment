@@ -12,6 +12,11 @@ export const routes: Routes = [
     loadComponent: () => import('./features/purchase-bill/purchase-bill.component').then(m => m.PurchaseBillComponent)
   },
   {
+    path: 'dashboard',
+    canActivate: [authGuard],
+    loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent)
+  },
+  {
     path: '**',
     redirectTo: ''
   }

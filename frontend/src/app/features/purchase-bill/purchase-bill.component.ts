@@ -81,6 +81,10 @@ export class PurchaseBillComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  goToDashboard() {
+    this.router.navigate(['/dashboard']);
+  }
+
   onItemAdded(item: PurchaseBillItem) {
     this.items = [...this.items, item];
   }

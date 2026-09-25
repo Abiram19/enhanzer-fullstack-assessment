@@ -15,6 +15,16 @@
     </div>
 
     <div class="header-actions">
+      <!-- 0. Dashboard button -->
+      <button class="action-btn" title="Go to Dashboard" (click)="goToDashboard()" type="button">
+        <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+      </button>
+
       <!-- 1. Refresh clockwise arrow (no outer circle) -->
       <button class="action-btn" title="Reset / Refresh" (click)="resetAll()" type="button">
         <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
